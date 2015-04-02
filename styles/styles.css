@@ -23,7 +23,8 @@ a:hover                        { text-decoration:none; }
 body {
     background-color: #000;
 }
-.carousel li {
+.carousel .elements li {
+    width: 100%;
     text-align: center;
 }
 .indicators {
