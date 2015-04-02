@@ -23,7 +23,7 @@ a:hover                        { text-decoration:none; }
 body {
     background-color: #000;
 }
-.carousel .elements li {
+.carousel .elements > li {
     width: 100%;
     text-align: center;
 }
