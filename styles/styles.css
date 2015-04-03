@@ -25,7 +25,11 @@ body {
 }
 .carousel .elements > li {
     width: 100%;
+    display: inline-block;
     text-align: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
 }
 .indicators {
     width: 100%;
@@ -38,12 +42,17 @@ body {
     height: 0.5em;
     border-radius: 0.25em;
     margin: 0.2em;
-    display: inline-block;
     background-color: orange;
 }
-.element-indicator {
+.elements-indicator {
+    display: inline-block;
+}
+.pages-indicator {
+
+}
+.element-indicator, .page-indicator {
     opacity: 0.4;
 }
-.element-indicator-active {
+.element-indicator-active, .page-indicator-active {
     opacity: 1;
 }
