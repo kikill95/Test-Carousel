@@ -1,13 +1,29 @@
 (function() {
     var firstPositionX = 0,
         firstPositionY = 0,
-        $element = $('.carousel .element'),
-        $elements = $('.carousel .elements');
+        $element = $('.carousel .element');
 
     $element.css('height', $('body').css('height'))
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
+        })
+        .on('mousemove', function(e) {
+            if ( ( firstPositionX !== 0 || firstPositionY !== 0 ) &&
+                    ( Math.abs(e.clientX - firstPositionX) > 50 || Math.abs(e.clientY - firstPositionY) > 50) )  {
+                    //if we really moving
+
+                if (Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
+                    $(e.target).animate({
+                        marginLeft: e.clientX - firstPositionX
+                    }, 0);
+                } else {
+                    $(e.target).animate({
+                        marginTop: e.clientY - firstPositionY
+                    }, 0);
+                }
+
+            }
         })
         .on('mouseup', function(e) {
             var secondPositionX = e.clientX,
@@ -30,12 +46,17 @@
                 }
 
             } else {
-                console.log('stay here');
+                $(e.target).animate({
+                    marginLeft: 0,
+                    marginTop: 0
+                }, 100);
             }
+            firstPositionX = firstPositionY = 0;
         })
         .on('dragstart', function(e) {
             e.preventDefault();
         });
+
     //because we don't want to change images size on zooming
     $(window).on('resize', function() {
         $element.css('height', $('body').css('height'));
