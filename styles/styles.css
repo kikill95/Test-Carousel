@@ -23,6 +23,9 @@ a:hover                        { text-decoration:none; }
 body {
     background-color: #000;
 }
+.carousel .page {
+    width: 100%;
+}
 .carousel .elements > li {
     width: 100%;
     display: inline-block;

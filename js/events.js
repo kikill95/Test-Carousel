@@ -5,24 +5,25 @@
         top = 0,
         left = 0;
 
-    $element.css('height', $('body').css('height'))
+    $element.css('height', $('body').css('height'));
+    $('.carousel .page')
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
-            top = parseInt($(e.target).css('marginTop'));
-            left = parseInt($(e.target).css('marginLeft'));
+            top = parseInt($(e.target).parent().parent().css('marginTop'));
+            left = parseInt($(e.target).parent().parent().css('marginLeft'));console.log( top );
         })
         .on('mousemove', function(e) {
             if ( ( firstPositionX !== 0 || firstPositionY !== 0 ) &&
                     ( Math.abs(e.clientX - firstPositionX) > 50 || Math.abs(e.clientY - firstPositionY) > 50) )  {
-                    //if we really moving
+                    //if we really are moving
 
                 if (Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
-                    $(e.target).animate({//includes + and -
+                    $(e.target).parent().parent().animate({//includes + and -
                         marginLeft: left + e.clientX - firstPositionX
                     }, 0);
                 } else {
-                    $(e.target).animate({//includes + and -
+                    $(e.target).parent().parent().animate({//includes + and -
                         marginTop: top + e.clientY - firstPositionY
                     }, 0);
                 }
@@ -37,28 +38,28 @@
 
                 if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
                     if (secondPositionX > firstPositionX) {
-                        $(e.target).animate({
+                        $(e.target).parent().parent().animate({
                             marginLeft: left + $(e.target).width()
                         }, 200);
                     } else {
-                        $(e.target).animate({
+                        $(e.target).parent().parent().animate({
                             marginLeft: left + -$(e.target).width()
                         }, 200);
                     }
                 } else {
                     if (secondPositionY > firstPositionY) {
-                        $(e.target).animate({
+                        $(e.target).parent().parent().animate({
                             marginTop: top + $(e.target).height()
                         }, 200);
                     } else {
-                        $(e.target).animate({
+                        $(e.target).parent().parent().animate({
                             marginTop: top + -$(e.target).height()
                         }, 200);
                     }
                 }
 
             } else {//come back
-                $(e.target).animate({
+                $(e.target).parent().parent().animate({
                     marginLeft: left,
                     marginTop: top
                 }, 200);
