@@ -1,12 +1,16 @@
-(function() {
+//(function() {
     var firstPositionX = 0,
         firstPositionY = 0,
-        $element = $('.carousel .element');
+        $element = $('.carousel .element'),
+        top = 0,
+        left = 0;
 
     $element.css('height', $('body').css('height'))
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
+            top = parseInt($(e.target).css('marginTop'));
+            left = parseInt($(e.target).css('marginLeft'));
         })
         .on('mousemove', function(e) {
             if ( ( firstPositionX !== 0 || firstPositionY !== 0 ) &&
@@ -15,11 +19,11 @@
 
                 if (Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
                     $(e.target).animate({//includes + and -
-                        marginLeft: e.clientX - firstPositionX
+                        marginLeft: left + e.clientX - firstPositionX
                     }, 0);
                 } else {
                     $(e.target).animate({//includes + and -
-                        marginTop: e.clientY - firstPositionY
+                        marginTop: top + e.clientY - firstPositionY
                     }, 0);
                 }
 
@@ -34,29 +38,29 @@
                 if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
                     if (secondPositionX > firstPositionX) {
                         $(e.target).animate({
-                            marginLeft: $(e.target).width()
+                            marginLeft: left + $(e.target).width()
                         }, 200);
                     } else {
                         $(e.target).animate({
-                            marginLeft: -$(e.target).width()
+                            marginLeft: left + -$(e.target).width()
                         }, 200);
                     }
                 } else {
                     if (secondPositionY > firstPositionY) {
                         $(e.target).animate({
-                            marginTop: $(e.target).height()
+                            marginTop: top + $(e.target).height()
                         }, 200);
                     } else {
                         $(e.target).animate({
-                            marginTop: -$(e.target).height()
+                            marginTop: top + -$(e.target).height()
                         }, 200);
                     }
                 }
 
             } else {//come back
                 $(e.target).animate({
-                    marginLeft: 0,
-                    marginTop: 0
+                    marginLeft: left,
+                    marginTop: top
                 }, 200);
             }
             firstPositionX = firstPositionY = 0;//we finish it (for mousemove)
@@ -72,4 +76,4 @@
 
 
 
-})();
+//})();
