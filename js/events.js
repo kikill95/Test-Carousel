@@ -16,7 +16,6 @@ function addMovingEffects($list) {
         .off('mousedown')
         .off('mousemove')
         .off('mouseup')
-        .off('dragstart')
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
@@ -76,9 +75,6 @@ function addMovingEffects($list) {
                 }, 200);
             }
             firstPositionX = firstPositionY = 0;//we finish it (for mousemove)
-        })
-        .on('dragstart', function(e) {
-            e.preventDefault();
         });
 
 }
