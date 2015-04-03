@@ -39,7 +39,7 @@ function addMovingEffects($list) {
 
             }
         })
-        .on('mouseup', function(e) {//TODO here we need to registrate changing Page (like element in Object)
+        .on('mouseup', function(e) {
             var secondPositionX = e.clientX,
                 secondPositionY = e.clientY,
                 $element = $('.carousel .element');
@@ -47,34 +47,66 @@ function addMovingEffects($list) {
                     Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4 ) {
 
                 if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
+                //horizontal move
                     if (secondPositionX > firstPositionX) {
-                        $(e.target).parent().parent().animate({
-                            marginLeft: left + $(e.target).width()
-                        }, 200);
+                    //go right
+                        if ( $(e.target).prev().length ) {
+                            $(e.target).parent().parent().animate({
+                                marginLeft: left + $(e.target).width()
+                            }, 200);
+                        } else {
+                            comeBack($(e.target));
+                        }
+
                     } else {
-                        $(e.target).parent().parent().animate({
-                            marginLeft: left + -$(e.target).width()
-                        }, 200);
+                    //go left
+                        if ( $(e.target).next().length ) {
+                            $(e.target).parent().parent().animate({
+                                marginLeft: left + -$(e.target).width()
+                            }, 200);
+                        } else {
+                            comeBack($(e.target));
+                        }
+
                     }
+
                 } else {
+                //vertical move
                     if (secondPositionY > firstPositionY) {
-                        $(e.target).parent().parent().animate({
-                            marginTop: top + $(e.target).height()
-                        }, 200);
+                    //go up
+                        if ( $(e.target).parent().parent().prev().length ) {
+                            $(e.target).parent().parent().animate({
+                                marginTop: top + $(e.target).height()
+                            }, 200);
+                        } else {
+                            comeBack($(e.target));
+                        }
+
                     } else {
-                        $(e.target).parent().parent().animate({
-                            marginTop: top + -$(e.target).height()
-                        }, 200);
+                    //go down
+                        if ( $(e.target).parent().parent().next().length ) {
+                            $(e.target).parent().parent().animate({
+                                marginTop: top + -$(e.target).height()
+                            }, 200);
+                        } else {
+                            comeBack($(e.target));
+                        }
+
                     }
+
                 }
 
-            } else {//come back
-                $(e.target).parent().parent().animate({
-                    marginLeft: left,
-                    marginTop: top
-                }, 200);
+            } else {
+                comeBack($(e.target));
             }
             firstPositionX = firstPositionY = 0;//we finished it (for mousemove condition)
         });
+
+    function comeBack($el) {
+        $el.parent().parent().animate({
+            marginLeft: left,
+            marginTop: top
+        }, 200);
+    }
 
 }
