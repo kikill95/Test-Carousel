@@ -20,7 +20,7 @@ function addMovingEffects($list) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
             top = parseInt($(e.target).parent().parent().css('marginTop'));
-            left = parseInt($(e.target).parent().parent().css('marginLeft'));console.log( top );//TODO
+            left = parseInt($(e.target).parent().parent().css('marginLeft'));
         })
         .on('mousemove', function(e) {
             if ( ( firstPositionX !== 0 || firstPositionY !== 0 ) &&
@@ -39,7 +39,7 @@ function addMovingEffects($list) {
 
             }
         })
-        .on('mouseup', function(e) {
+        .on('mouseup', function(e) {//TODO here we need to registrate changing Page (like element in Object)
             var secondPositionX = e.clientX,
                 secondPositionY = e.clientY,
                 $element = $('.carousel .element');
@@ -74,7 +74,7 @@ function addMovingEffects($list) {
                     marginTop: top
                 }, 200);
             }
-            firstPositionX = firstPositionY = 0;//we finish it (for mousemove)
+            firstPositionX = firstPositionY = 0;//we finished it (for mousemove condition)
         });
 
 }
