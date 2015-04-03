@@ -34,28 +34,36 @@ body {
     background-position: center center;
     background-size: 100%;
 }
-.indicators {
+.info-block .indicators {
     width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 4px;
 }
-.indicators li {
+.info-block .indicators li {
     width: 0.5em;
     height: 0.5em;
     border-radius: 0.25em;
-    margin: 0.2em;
     background-color: orange;
+    z-index: 2;
 }
-.elements-indicator {
+.info-block .pages-indicator {
+    position: absolute;
+}
+.info-block .pages-indicator li {
+    margin: 0.3em;
+    float: right;
+    clear: both;
+}
+.info-block .elements-indicator {
+    position: absolute;
+    bottom: 4px;
+    text-align: center;
+}
+.info-block .elements-indicator li {
     display: inline-block;
+    margin: 0.2em;
 }
-.pages-indicator {
-
-}
-.element-indicator, .page-indicator {
+.info-block .element-indicator, .page-indicator {
     opacity: 0.4;
 }
 .element-indicator-active, .page-indicator-active {
-    opacity: 1;
+    opacity: 1 !important;
 }

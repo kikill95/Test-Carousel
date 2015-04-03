@@ -5,7 +5,6 @@
         top = 0,
         left = 0;
 
-    $element.css('height', $('body').css('height'));
     $('.carousel .page')
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
@@ -16,7 +15,7 @@
         .on('mousemove', function(e) {
             if ( ( firstPositionX !== 0 || firstPositionY !== 0 ) &&
                     ( Math.abs(e.clientX - firstPositionX) > 50 || Math.abs(e.clientY - firstPositionY) > 50) )  {
-                    //if we really are moving
+                    //if we are really moving
 
                 if (Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
                     $(e.target).parent().parent().animate({//includes + and -
