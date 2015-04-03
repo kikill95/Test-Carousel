@@ -14,11 +14,11 @@
                     //if we really moving
 
                 if (Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
-                    $(e.target).animate({
+                    $(e.target).animate({//includes + and -
                         marginLeft: e.clientX - firstPositionX
                     }, 0);
                 } else {
-                    $(e.target).animate({
+                    $(e.target).animate({//includes + and -
                         marginTop: e.clientY - firstPositionY
                     }, 0);
                 }
@@ -45,13 +45,13 @@
                     }
                 }
 
-            } else {
+            } else {//come back
                 $(e.target).animate({
                     marginLeft: 0,
                     marginTop: 0
                 }, 100);
             }
-            firstPositionX = firstPositionY = 0;
+            firstPositionX = firstPositionY = 0;//we finish it (for mousemove)
         })
         .on('dragstart', function(e) {
             e.preventDefault();
