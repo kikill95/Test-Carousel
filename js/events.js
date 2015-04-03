@@ -16,11 +16,21 @@
                     Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4 ) {
 
                 if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
-                    console.log('left-right');
+                    if (secondPositionX > firstPositionX) {
+                        console.log('right');
+                    } else {
+                        console.log('left');
+                    }
                 } else {
-                    console.log('up-down');
+                    if (secondPositionY > firstPositionY) {
+                        console.log('down');
+                    } else {
+                        console.log('up');
+                    }
                 }
 
+            } else {
+                console.log('stay here');
             }
         })
         .on('dragstart', function(e) {
