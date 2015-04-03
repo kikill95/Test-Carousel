@@ -9,6 +9,7 @@ Page.prototype.addPage = function(url, elements) {
         url: url || '',
         elements: elements || []
     });
+    render(_.last(this.pages), this.pages.length);
 };
 Page.prototype.insertPage = function(i, url, elements) {
 
@@ -31,6 +32,7 @@ Page.prototype.insertPage = function(i, url, elements) {
                 elements: elements || []
             };
             k--;
+            render(this.pages[j], i + 1);
 
         }
     }

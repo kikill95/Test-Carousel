@@ -6,3 +6,7 @@ function styling() {
     $('.carousel .pages').css('height', height);
     $('.indicators.pages-indicator').css('top', height / 2 - $('.page-indicator').length * parseInt($('.page-indicator').css('height')) + 'px');
 }
+
+function render($element, position) {
+
+}

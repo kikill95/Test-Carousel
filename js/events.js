@@ -1,4 +1,4 @@
-addMovingEffects($('.carousel .page'));
+addMovingEffects($('.carousel .page'));//TODO delete this
 //because we don't want to change images size on zooming
 $(window).on('resize', function() {
     $('.carousel .element').css('height', $('body').css('height'));
