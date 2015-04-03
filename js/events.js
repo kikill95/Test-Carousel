@@ -1,11 +1,21 @@
-//(function() {//TODO
+addMovingEffects($('.carousel .page'));
+//because we don't want to change images size on zooming
+$(window).on('resize', function() {
+    $('.carousel .element').css('height', $('body').css('height'));
+});
+
+
+
+function addMovingEffects($list) {
     var firstPositionX = 0,
         firstPositionY = 0,
-        $element = $('.carousel .element'),
         top = 0,
         left = 0;
 
-    $('.carousel .page')
+    $list
+        .off('mousedown')
+        .off('mousemove')
+        .off('mouseup')
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
@@ -31,7 +41,8 @@
         })
         .on('mouseup', function(e) {
             var secondPositionX = e.clientX,
-                secondPositionY = e.clientY;
+                secondPositionY = e.clientY,
+                $element = $('.carousel .element');
             if ( Math.abs(secondPositionX - firstPositionX) > parseInt($element.css('width')) / 4 ||
                     Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4 ) {
 
@@ -69,11 +80,4 @@
             e.preventDefault();
         });
 
-    //because we don't want to change images size on zooming
-    $(window).on('resize', function() {
-        $element.css('height', $('body').css('height'));
-    });
-
-
-
-//})();
+}

@@ -32,10 +32,11 @@ body {
     text-align: center;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 100%;
+    background-size: 92%;
 }
 .info-block .indicators {
     width: 100%;
+    position: absolute;
 }
 .info-block .indicators li {
     width: 0.5em;
@@ -45,7 +46,7 @@ body {
     z-index: 2;
 }
 .info-block .pages-indicator {
-    position: absolute;
+    right: 5px;
 }
 .info-block .pages-indicator li {
     margin: 0.3em;
@@ -53,7 +54,6 @@ body {
     clear: both;
 }
 .info-block .elements-indicator {
-    position: absolute;
     bottom: 4px;
     text-align: center;
 }
