@@ -16,6 +16,7 @@ function addMovingEffects($list) {
         .off('mousedown')
         .off('mousemove')
         .off('mouseup')
+        .off('dragstart')
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
