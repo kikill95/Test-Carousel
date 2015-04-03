@@ -33,15 +33,23 @@
 
                 if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
                     if (secondPositionX > firstPositionX) {
-                        console.log('right');
+                        $(e.target).animate({
+                            marginLeft: $(e.target).width()
+                        }, 200);
                     } else {
-                        console.log('left');
+                        $(e.target).animate({
+                            marginLeft: -$(e.target).width()
+                        }, 200);
                     }
                 } else {
                     if (secondPositionY > firstPositionY) {
-                        console.log('down');
+                        $(e.target).animate({
+                            marginTop: $(e.target).height()
+                        }, 200);
                     } else {
-                        console.log('up');
+                        $(e.target).animate({
+                            marginTop: -$(e.target).height()
+                        }, 200);
                     }
                 }
 
@@ -49,7 +57,7 @@
                 $(e.target).animate({
                     marginLeft: 0,
                     marginTop: 0
-                }, 100);
+                }, 200);
             }
             firstPositionX = firstPositionY = 0;//we finish it (for mousemove)
         })
