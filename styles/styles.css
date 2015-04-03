@@ -23,6 +23,9 @@ a:hover                        { text-decoration:none; }
 body {
     background-color: #000;
 }
+.carousel .pages {
+    /*overflow: hidden;*/
+}
 .carousel .page {
     width: 100%;
 }
