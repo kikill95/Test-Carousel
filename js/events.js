@@ -1,4 +1,4 @@
-//(function() {
+//(function() {//TODO
     var firstPositionX = 0,
         firstPositionY = 0,
         $element = $('.carousel .element'),
@@ -11,7 +11,7 @@
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
             top = parseInt($(e.target).parent().parent().css('marginTop'));
-            left = parseInt($(e.target).parent().parent().css('marginLeft'));console.log( top );
+            left = parseInt($(e.target).parent().parent().css('marginLeft'));console.log( top );//TODO
         })
         .on('mousemove', function(e) {
             if ( ( firstPositionX !== 0 || firstPositionY !== 0 ) &&
