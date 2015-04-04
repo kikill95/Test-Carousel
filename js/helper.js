@@ -5,6 +5,7 @@ function styling() {
     $('.indicators.pages-indicator').css('top', height / 2 - $('.page-indicator').length * parseInt($('.page-indicator').css('height')) + 'px');
 }
 
+
 //indicators - elements
 function setIndicator(pages, currentPage) {
     var list = '';
