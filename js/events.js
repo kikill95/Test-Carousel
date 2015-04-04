@@ -89,7 +89,7 @@ function addMovingEffects(ourPages, $list) {
                             $('.info-block .pages-indicator .page-indicator-active').prev().addClass('page-indicator-active');
                             $('.info-block .pages-indicator .page-indicator-active').last().removeClass('page-indicator-active');
                             currentPage--;
-                            setIndicator(ourPages.pages, currentPage);
+                            setIndicator(ourPages, currentPage);
 
                         } else {
                             comeBack($(e.target));
@@ -105,7 +105,7 @@ function addMovingEffects(ourPages, $list) {
                             $('.info-block .pages-indicator .page-indicator-active').next().addClass('page-indicator-active');
                             $('.info-block .pages-indicator .page-indicator-active').first().removeClass('page-indicator-active');
                             currentPage++;
-                            setIndicator(ourPages.pages, currentPage);
+                            setIndicator(ourPages, currentPage);
 
                         } else {
                             comeBack($(e.target));

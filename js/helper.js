@@ -16,11 +16,11 @@ jQuery.fn.extend({
 
 
 //indicators - elements
-function setIndicator(pages, currentPage) {
+function setIndicator(ourPages, currentPage) {
     var list = '';
-    for (var i = 0; i < pages[currentPage].elements.length; i++) {
+    for (var i = 0; i < ourPages[currentPage].elements.length; i++) {
 
-        if (i === pages[currentPage].current) {
+        if (i === ourPages[currentPage].current) {
             list += '<li class="element-indicator element-indicator-active"></li>'
         } else {
             list += '<li class="element-indicator"></li>'
