@@ -38,8 +38,8 @@ function setIndicator(ourPages, currentPage) {
 var ourPages = new Page();
 var currentPage = 0;
 (function() {
-    ourPages.addPage(['city_1.jpg', 'city_2.jpg', 'city_3.jpg', 'city_4.jpg']);
     ourPages.addPage(['nature_1.jpg', 'nature_2.jpg', 'nature_3.jpg', 'nature_4.jpg']);
+    ourPages.addPage(['city_1.jpg', 'city_2.jpg', 'city_3.jpg', 'city_4.jpg']);
 
     //init indicators of elements
     var list = '';

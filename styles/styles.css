@@ -24,9 +24,6 @@ body {
     overflow: hidden;
     background-color: #000;
 }
-.carousel .pages {
-    overflow: hidden;
-}
 .carousel .page {
     width: 100%;
 }
