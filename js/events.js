@@ -56,7 +56,7 @@ function addMovingEffects(ourPages, $list) {
 
                             $('.info-block .elements-indicator .element-indicator-active').prev().addClass('element-indicator-active');
                             $('.info-block .elements-indicator .element-indicator-active').last().removeClass('element-indicator-active');
-                            ourPages.pages[currentPage].current--;
+                            ourPages[currentPage].current--;
                         } else {
                             comeBack($(e.target));
                         }
@@ -70,7 +70,7 @@ function addMovingEffects(ourPages, $list) {
 
                             $('.info-block .elements-indicator .element-indicator-active').next().addClass('element-indicator-active');
                             $('.info-block .elements-indicator .element-indicator-active').first().removeClass('element-indicator-active');
-                            ourPages.pages[currentPage].current++;
+                            ourPages[currentPage].current++;
                         } else {
                             comeBack($(e.target));
                         }
