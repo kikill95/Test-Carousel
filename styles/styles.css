@@ -21,16 +21,13 @@ a:hover                        { text-decoration:none; }
 /*-------------------------------------STYLES---------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 body {
+    overflow: hidden;
     background-color: #000;
-}
-.carousel .pages {
-    /*overflow: hidden;*/
 }
 .carousel .page {
     width: 100%;
 }
-.carousel .elements > li {
-    width: 100%;
+.carousel .element {
     display: inline-block;
     text-align: center;
     background-repeat: no-repeat;
@@ -64,7 +61,7 @@ body {
     display: inline-block;
     margin: 0.2em;
 }
-.info-block .element-indicator, .page-indicator {
+.info-block .element-indicator, .info-block  .page-indicator {
     opacity: 0.4;
 }
 .element-indicator-active, .page-indicator-active {

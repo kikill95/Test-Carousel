@@ -1,4 +1,3 @@
-addMovingEffects($('.carousel .page'));//TODO delete this
 //because we don't want to change images size on zooming
 $(window).on('resize', function() {
     $('.carousel .element').css('height', $('body').css('height'));
@@ -6,7 +5,7 @@ $(window).on('resize', function() {
 
 
 
-function addMovingEffects($list) {
+function addMovingEffects(ourPages, $list) {
     var firstPositionX = 0,
         firstPositionY = 0,
         top = 0,
@@ -54,6 +53,10 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + $(e.target).width()
                             }, 200);
+
+                            $('.info-block .elements-indicator .element-indicator-active').prev().addClass('element-indicator-active');
+                            $('.info-block .elements-indicator .element-indicator-active').last().removeClass('element-indicator-active');
+                            ourPages[currentPage].current--;
                         } else {
                             comeBack($(e.target));
                         }
@@ -64,6 +67,10 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + -$(e.target).width()
                             }, 200);
+
+                            $('.info-block .elements-indicator .element-indicator-active').next().addClass('element-indicator-active');
+                            $('.info-block .elements-indicator .element-indicator-active').first().removeClass('element-indicator-active');
+                            ourPages[currentPage].current++;
                         } else {
                             comeBack($(e.target));
                         }
@@ -78,6 +85,12 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + $(e.target).height()
                             }, 200);
+
+                            $('.info-block .pages-indicator .page-indicator-active').prev().addClass('page-indicator-active');
+                            $('.info-block .pages-indicator .page-indicator-active').last().removeClass('page-indicator-active');
+                            currentPage--;
+                            setIndicator(ourPages, currentPage);
+
                         } else {
                             comeBack($(e.target));
                         }
@@ -88,6 +101,12 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + -$(e.target).height()
                             }, 200);
+
+                            $('.info-block .pages-indicator .page-indicator-active').next().addClass('page-indicator-active');
+                            $('.info-block .pages-indicator .page-indicator-active').first().removeClass('page-indicator-active');
+                            currentPage++;
+                            setIndicator(ourPages, currentPage);
+
                         } else {
                             comeBack($(e.target));
                         }
