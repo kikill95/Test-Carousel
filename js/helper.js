@@ -6,11 +6,11 @@ function styling() {
 }
 
 //indicators - elements
-function setIndicator($el) {//TODO wrong element
+function setIndicator(pages, currentPage) {
     var list = '';
-    for (var i = 0; i < $el.parent().find('li').length; i++) {
+    for (var i = 0; i < pages[currentPage].elements.length; i++) {
 
-        if (i === 0) {
+        if (i === pages[currentPage].current) {
             list += '<li class="element-indicator element-indicator-active"></li>'
         } else {
             list += '<li class="element-indicator"></li>'
@@ -20,16 +20,20 @@ function setIndicator($el) {//TODO wrong element
     $('.indicators.elements-indicator').html(list);
 }
 
-//INIT
+
+
+
+//------------START------------
 //for beginning app
 var ourPages = new Page();
+var currentPage = 0;
 (function() {
     ourPages.addPage(['city_1.jpg', 'city_2.jpg', 'city_3.jpg', 'city_4.jpg']);
     ourPages.addPage(['nature_1.jpg', 'nature_2.jpg', 'nature_3.jpg', 'nature_4.jpg']);
 
     //init indicators of elements
     var list = '';
-    for (var i = 0; i < ourPages.pages[0].elements.length; i++) {
+    for (var i = 0; i < ourPages.pages[currentPage].elements.length; i++) {
 
         if (i === 0) {
             list += '<li class="element-indicator element-indicator-active"></li>'

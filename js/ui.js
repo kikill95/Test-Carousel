@@ -10,9 +10,10 @@ function Page () {
 Page.prototype.addPage = function(elements) {
     this.pages.push({
         id: countId(),
-        elements: elements || []
+        elements: elements || [],
+        current: 0
     });
-    renderPage(_.last(this.pages), this.pages.length);
+    renderPage(this.pages, _.last(this.pages), this.pages.length);
 };
 Page.prototype.insertPage = function(i, elements) {
 
@@ -23,17 +24,19 @@ Page.prototype.insertPage = function(i, elements) {
 
             this.pages[j] = {
                 id: clone[k].id,
-                elements: clone[k].elements
+                elements: clone[k].elements,
+                current: clone[k].current
             };
 
         } else {
 
             this.pages[j] = {
                 id: countId(),
-                elements: elements || []
+                elements: elements || [],
+                current: 0
             };
             k--;
-            renderPage(this.pages[j], i + 1);
+            renderPage(this.pages, this.pages[j], i + 1);
 
         }
     }
@@ -53,15 +56,15 @@ Page.prototype.getPages = function() {
 
 
 
-function renderPage($element, pagePosition) {
+function renderPage(ourPages, element, pagePosition) {
     var $pagesList = $('.carousel .pages .page'),
         length = $pagesList.length || 0,
         html,
-        picturesCount = $element.elements.length;
+        picturesCount = element.elements.length;
 
     html = '<li class="page"><ul class="elements">';
     for (var i = 0; i < picturesCount; i++) {
-        html += '<li class="element" style="background-image: url(images/' + $element.elements[i] + ')"></li>'
+        html += '<li class="element" style="background-image: url(images/' + element.elements[i] + ')"></li>'
     }
     html += '</ul></li>';
 
@@ -80,7 +83,7 @@ function renderPage($element, pagePosition) {
 
     //helper functions
     styling();
-    addMovingEffects($('.carousel .pages .page'));
+    addMovingEffects(ourPages, $('.carousel .pages .page'));
 
 
     //indicators - pages
