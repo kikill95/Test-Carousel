@@ -64,7 +64,7 @@ body {
     display: inline-block;
     margin: 0.2em;
 }
-.info-block .element-indicator, .page-indicator {
+.info-block .element-indicator, .info-block  .page-indicator {
     opacity: 0.4;
 }
 .element-indicator-active, .page-indicator-active {

@@ -54,8 +54,8 @@ function addMovingEffects($list) {
                                 marginLeft: left + $(e.target).width()
                             }, 200);
 
-                            $('.info-block .pages-indicator .element-indicator-active').prev().addClass('element-indicator-active');
-                            $('.info-block .pages-indicator .element-indicator-active').last().removeClass('element-indicator-active');
+                            $('.info-block .elements-indicator .element-indicator-active').prev().addClass('element-indicator-active');
+                            $('.info-block .elements-indicator .element-indicator-active').last().removeClass('element-indicator-active');
                         } else {
                             comeBack($(e.target));
                         }
@@ -67,8 +67,8 @@ function addMovingEffects($list) {
                                 marginLeft: left + -$(e.target).width()
                             }, 200);
 
-                            $('.info-block .pages-indicator .element-indicator-active').next().addClass('element-indicator-active');
-                            $('.info-block .pages-indicator .element-indicator-active').first().removeClass('element-indicator-active');
+                            $('.info-block .elements-indicator .element-indicator-active').next().addClass('element-indicator-active');
+                            $('.info-block .elements-indicator .element-indicator-active').first().removeClass('element-indicator-active');
                         } else {
                             comeBack($(e.target));
                         }
@@ -86,6 +86,8 @@ function addMovingEffects($list) {
 
                             $('.info-block .pages-indicator .page-indicator-active').prev().addClass('page-indicator-active');
                             $('.info-block .pages-indicator .page-indicator-active').last().removeClass('page-indicator-active');
+                            setIndicator($(e.target));
+
                         } else {
                             comeBack($(e.target));
                         }
@@ -99,6 +101,8 @@ function addMovingEffects($list) {
 
                             $('.info-block .pages-indicator .page-indicator-active').next().addClass('page-indicator-active');
                             $('.info-block .pages-indicator .page-indicator-active').first().removeClass('page-indicator-active');
+                            setIndicator($(e.target));
+
                         } else {
                             comeBack($(e.target));
                         }

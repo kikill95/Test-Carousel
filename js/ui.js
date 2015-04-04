@@ -3,6 +3,7 @@ var countId = function() {
         return this.id++;
     };
 
+
 function Page () {
     this.pages = [];
 }
@@ -82,7 +83,7 @@ function renderPage($element, pagePosition) {
     addMovingEffects($('.carousel .pages .page'));
 
 
-    //indicators
+    //indicators - pages
     if (length === 0) {
         $('.info-block .pages-indicator').append('<li class="page-indicator page-indicator-active"></li>');
     } else {
