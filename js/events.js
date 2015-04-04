@@ -53,6 +53,9 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + $(e.target).width()
                             }, 200);
+
+                            $('.info-block .pages-indicator .element-indicator-active').prev().addClass('element-indicator-active');
+                            $('.info-block .pages-indicator .element-indicator-active').last().removeClass('element-indicator-active');
                         } else {
                             comeBack($(e.target));
                         }
@@ -63,6 +66,9 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + -$(e.target).width()
                             }, 200);
+
+                            $('.info-block .pages-indicator .element-indicator-active').next().addClass('element-indicator-active');
+                            $('.info-block .pages-indicator .element-indicator-active').first().removeClass('element-indicator-active');
                         } else {
                             comeBack($(e.target));
                         }
@@ -77,6 +83,9 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + $(e.target).height()
                             }, 200);
+
+                            $('.info-block .pages-indicator .page-indicator-active').prev().addClass('page-indicator-active');
+                            $('.info-block .pages-indicator .page-indicator-active').last().removeClass('page-indicator-active');
                         } else {
                             comeBack($(e.target));
                         }
@@ -87,6 +96,9 @@ function addMovingEffects($list) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + -$(e.target).height()
                             }, 200);
+
+                            $('.info-block .pages-indicator .page-indicator-active').next().addClass('page-indicator-active');
+                            $('.info-block .pages-indicator .page-indicator-active').first().removeClass('page-indicator-active');
                         } else {
                             comeBack($(e.target));
                         }
