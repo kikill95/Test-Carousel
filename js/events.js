@@ -19,7 +19,7 @@ function addMovingEffects($list) {
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
-            top = parseInt($(e.target).parent().parent().css('marginTop'));
+            top = parseInt($(e.target).parent().parent().parent().css('marginTop'));
             left = parseInt($(e.target).parent().parent().css('marginLeft'));
         })
         .on('mousemove', function(e) {
@@ -32,7 +32,7 @@ function addMovingEffects($list) {
                         marginLeft: left + e.clientX - firstPositionX
                     }, 0);
                 } else {
-                    $(e.target).parent().parent().animate({//includes + and -
+                    $(e.target).parent().parent().parent().animate({//includes + and -
                         marginTop: top + e.clientY - firstPositionY
                     }, 0);
                 }
@@ -75,7 +75,7 @@ function addMovingEffects($list) {
                     if (secondPositionY > firstPositionY) {
                     //go up
                         if ( $(e.target).parent().parent().prev().length ) {
-                            $(e.target).parent().parent().animate({
+                            $(e.target).parent().parent().parent().animate({
                                 marginTop: top + $(e.target).height()
                             }, 200);
                         } else {
@@ -85,7 +85,7 @@ function addMovingEffects($list) {
                     } else {
                     //go down
                         if ( $(e.target).parent().parent().next().length ) {
-                            $(e.target).parent().parent().animate({
+                            $(e.target).parent().parent().parent().animate({
                                 marginTop: top + -$(e.target).height()
                             }, 200);
                         } else {
@@ -104,7 +104,9 @@ function addMovingEffects($list) {
 
     function comeBack($el) {
         $el.parent().parent().animate({
-            marginLeft: left,
+            marginLeft: left
+        }, 200);
+        $el.parent().parent().parent().animate({
             marginTop: top
         }, 200);
     }
