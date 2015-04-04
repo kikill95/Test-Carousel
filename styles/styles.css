@@ -1,0 +1,72 @@
+/*----------------------------------------------------------------------------------*/
+/*------------------------------RESET DEFAULT STYLES--------------------------------*/
+/*----------------------------------------------------------------------------------*/
+html,body                       { width:100%; height:100%; }
+body                            { padding:0; margin:0; font:100% Tahoma, sans-serif; background:#fff; color:#000; }
+div,p,a,span,em,strong,img,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,td,tr,form,fieldset,label,select,input,textarea {
+	padding:0;
+	margin:0;
+	outline:none;
+	list-style:none;
+}
+select, input, textarea        { font-size:100%; vertical-align:middle; }
+textarea                       { vertical-align:top; }
+:focus                         { outline:none; }
+input[type=submit]             { cursor:pointer; }
+img, fieldset                  { border:0; }
+table                          { border-collapse:collapse; border-spacing:0; }
+a:link, a:visited              { font:100% Tahoma, sans-serif; color:#000; text-decoration:underline; }
+a:hover                        { text-decoration:none; }
+/*----------------------------------------------------------------------------------*/
+/*-------------------------------------STYLES---------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+body {
+    background-color: #000;
+}
+.carousel .pages {
+    /*overflow: hidden;*/
+}
+.carousel .page {
+    width: 100%;
+}
+.carousel .elements > li {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+}
+.info-block .indicators {
+    width: 100%;
+    position: absolute;
+}
+.info-block .indicators li {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 0.25em;
+    background-color: orange;
+    z-index: 2;
+}
+.info-block .pages-indicator {
+    right: 5px;
+}
+.info-block .pages-indicator li {
+    margin: 0.3em;
+    float: right;
+    clear: both;
+}
+.info-block .elements-indicator {
+    bottom: 4px;
+    text-align: center;
+}
+.info-block .elements-indicator li {
+    display: inline-block;
+    margin: 0.2em;
+}
+.info-block .element-indicator, .page-indicator {
+    opacity: 0.4;
+}
+.element-indicator-active, .page-indicator-active {
+    opacity: 1 !important;
+}
