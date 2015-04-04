@@ -1,9 +1,18 @@
 function styling() {
-    var height = parseInt($('body').css('height'));
-    $('.carousel .element').css('height', height);
+    var height = parseInt($('body').css('height')),
+        width = parseInt($('body').css('width'));
+
+    $('.carousel .element').css('height', height)
+        .css('width', width);
+    $('.carousel .elements').dizziness(width);
     $('.carousel .pages').css('height', height);
     $('.indicators.pages-indicator').css('top', height / 2 - $('.page-indicator').length * parseInt($('.page-indicator').css('height')) + 'px');
 }
+jQuery.fn.extend({
+    dizziness: function(width) {
+        this.css('width', this.last().children().length * parseInt(width) + 'px');
+    }
+});
 
 
 //indicators - elements

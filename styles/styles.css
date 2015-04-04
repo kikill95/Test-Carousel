@@ -21,16 +21,16 @@ a:hover                        { text-decoration:none; }
 /*-------------------------------------STYLES---------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 body {
+    overflow: hidden;
     background-color: #000;
 }
 .carousel .pages {
-    /*overflow: hidden;*/
+    overflow: hidden;
 }
 .carousel .page {
     width: 100%;
 }
-.carousel .elements > li {
-    width: 100%;
+.carousel .element {
     display: inline-block;
     text-align: center;
     background-repeat: no-repeat;
