@@ -1,17 +1,19 @@
-var id = 0;
+var countId = function() {
+        this.id = this.id || 0;
+        return this.id++;
+    };
 
 function Page () {
     this.pages = [];
 }
-Page.prototype.addPage = function(url, elements) {
+Page.prototype.addPage = function(elements) {
     this.pages.push({
-        id: id++,
-        url: url || '',
+        id: countId(),
         elements: elements || []
     });
-    render(_.last(this.pages), this.pages.length);
+    renderPage(_.last(this.pages), this.pages.length);
 };
-Page.prototype.insertPage = function(i, url, elements) {
+Page.prototype.insertPage = function(i, elements) {
 
     var clone = _.clone(this.pages),
         lng = clone.length;
@@ -20,19 +22,17 @@ Page.prototype.insertPage = function(i, url, elements) {
 
             this.pages[j] = {
                 id: clone[k].id,
-                url: clone[k].url,
                 elements: clone[k].elements
             };
 
         } else {
 
             this.pages[j] = {
-                id: id++,
-                url: url || '',
+                id: countId(),
                 elements: elements || []
             };
             k--;
-            render(this.pages[j], i + 1);
+            renderPage(this.pages[j], i + 1);
 
         }
     }
@@ -49,3 +49,35 @@ Page.prototype.getPage = function(i) {
 Page.prototype.getPages = function() {
     return this.pages;
 };
+
+
+function renderPage($element, pagePosition) {
+    var $pagesList = $('.carousel .pages .page'),
+        length = $pagesList.length || 0,
+        html,
+        picturesCount = $element.elements.length;
+
+    html = '<li class="page"><ul class="elements">';
+    for (var i = 0; i < picturesCount; i++) {
+        html += '<li class="element" style="background-image: url(images/' + $element.elements[i] + ')"></li>'
+    }
+    html += '</ul></li>';
+
+    if (_.isNumber(pagePosition)) {
+        if (pagePosition > length) {
+            pagePosition = length;
+        }
+
+        if (pagePosition > 1 && length !== 0) {
+            $pagesList[pagePosition - 1].after(html);
+        } else {
+            $('.carousel .pages').append(html);
+        }
+
+    }
+
+    //helper functions
+    styling();
+    addMovingEffects($('.carousel .pages .page'));
+
+}
