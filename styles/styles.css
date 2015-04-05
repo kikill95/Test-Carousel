@@ -41,8 +41,8 @@ body {
 .info-block .indicators li {
     width: 0.5em;
     height: 0.5em;
-    behavior: url(pie/PIE.htc); /* IE border-radius */
     border-radius: 0.25em;
+    behavior: url(/styles/pie/PIE.htc); /* IE border-radius */
     background-color: orange;
     z-index: 2;
 }
