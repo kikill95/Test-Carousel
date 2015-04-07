@@ -1,16 +1,22 @@
-function styling() {
+function styling(index) {
     var height = parseInt($('body').css('height')),
         width = parseInt($('body').css('width'));
 
     $('.carousel .element').css('height', height)
         .css('width', width);
-    $('.carousel .elements').dizziness(width);
+    $('.carousel .elements').dizziness(width, index);
     $('.carousel .pages').css('height', height);
     $('.indicators.pages-indicator').css('top', height / 2 - $('.page-indicator').length * parseInt($('.page-indicator').css('height')) + 'px');
 }
 jQuery.fn.extend({
-    dizziness: function(width) {
-        this.css('width', this.last().children().length * parseInt(width) + 'px');
+    dizziness: function(width, index) {
+        var length,
+            $element = this.first();
+        for (var i = 0; i < index; i++) {
+            length = $element.children().length;
+            $element = $element.next();
+        }
+        this.css('width', length * parseInt(width) + 'px');
     }
 });
 

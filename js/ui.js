@@ -82,7 +82,7 @@ function renderPage(ourPages, element, pagePosition) {
     }
 
     //helper functions
-    styling();
+    styling(pagePosition);
     addMovingEffects(ourPages, $('.carousel .pages .page'));
 
 
