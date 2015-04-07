@@ -82,15 +82,15 @@ function renderPage(ourPages, element, pagePosition) {
     }
 
     //helper functions
-    styling();
+    styling(pagePosition);
     addMovingEffects(ourPages, $('.carousel .pages .page'));
 
 
     //indicators - pages
     if (length === 0) {
-        $('.info-block .pages-indicator').append('<li class="page-indicator page-indicator-active"></li>');
+        $('.info-block .pages-indicator').append('<li class="page-indicator-active"></li>');
     } else {
-        $('.info-block .pages-indicator').append('<li class="page-indicator"></li>');
+        $('.info-block .pages-indicator').append('<li></li>');
     }
 
 }
