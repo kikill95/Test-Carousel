@@ -9,7 +9,9 @@ function addMovingEffects(ourPages, $list) {
     var firstPositionX = 0,
         firstPositionY = 0,
         top = 0,
-        left = 0;
+        left = 0,
+        canVerticalMove = true,
+        canHorisontalMove = true;
 
     $list
         .off('mousedown')
@@ -24,16 +26,21 @@ function addMovingEffects(ourPages, $list) {
         .on('mousemove', function(e) {
             if ( ( firstPositionX !== 0 || firstPositionY !== 0 ) &&
                     ( Math.abs(e.clientX - firstPositionX) > 50 || Math.abs(e.clientY - firstPositionY) > 50) )  {
-                    //if we are really moving
 
-                if (Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
-                    $(e.target).parent().parent().animate({//includes + and -
+                if (Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)
+                    && canHorisontalMove) {
+
+                    $(e.target).parent().parent().animate({
                         marginLeft: left + e.clientX - firstPositionX
                     }, 0);
-                } else {
-                    $(e.target).parent().parent().parent().animate({//includes + and -
+                    canVerticalMove = false;
+
+                } else if (canVerticalMove) {
+
+                    $(e.target).parent().parent().parent().animate({
                         marginTop: top + e.clientY - firstPositionY
                     }, 0);
+                    canHorisontalMove = false;
                 }
 
             }
@@ -118,7 +125,8 @@ function addMovingEffects(ourPages, $list) {
             } else {
                 comeBack($(e.target));
             }
-            firstPositionX = firstPositionY = 0;//we finished it (for mousemove condition)
+            firstPositionX = firstPositionY = 0;
+            canHorisontalMove = canVerticalMove = true;
         });
 
     function comeBack($el) {
