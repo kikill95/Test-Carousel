@@ -88,9 +88,9 @@ function renderPage(ourPages, element, pagePosition) {
 
     //indicators - pages
     if (length === 0) {
-        $('.info-block .pages-indicator').append('<li class="page-indicator page-indicator-active"></li>');
+        $('.info-block .pages-indicator').append('<li class="page-indicator-active"></li>');
     } else {
-        $('.info-block .pages-indicator').append('<li class="page-indicator"></li>');
+        $('.info-block .pages-indicator').append('<li></li>');
     }
 
 }
