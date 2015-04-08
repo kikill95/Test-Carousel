@@ -46,6 +46,11 @@ Page.prototype.removePage = function(i) {
     this.pages = _.filter(this.pages, function(list, num) {
         return num !== i;
     });
+    $('.carousel .pages').html('');
+    var length = this.pages.length;
+    for (var j = 0; j < length; j++) {
+        renderPage(this.pages, this.pages[j], j + 1);
+    }
 };
 Page.prototype.getPage = function(i) {
     return this.pages[i];
@@ -57,8 +62,7 @@ Page.prototype.getPages = function() {
 
 
 function renderPage(ourPages, element, pagePosition) {
-    var $pagesList = $('.carousel .pages .page'),
-        length = $pagesList.length || 0,
+    var length = $('.carousel .pages .page').length || 0,
         html,
         picturesCount = element.elements.length;
 
@@ -74,7 +78,7 @@ function renderPage(ourPages, element, pagePosition) {
         }
 
         if (pagePosition > 1 && length !== 0) {
-            $pagesList[pagePosition - 1].after(html);
+            $('.carousel .pages .page')[pagePosition - 1].after(html);//TODO
         } else {
             $('.carousel .pages').append(html);
         }
