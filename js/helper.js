@@ -10,12 +10,8 @@ function styling(index) {
 }
 jQuery.fn.extend({
     dizziness: function(width, index) {
-        var length,
-            $element = this.first();
-        for (var i = 0; i < index; i++) {
+        var $element = $(this[index - 1]),
             length = $element.children().length;
-            $element = $element.next();
-        }
         this.css('width', length * parseInt(width) + 'px');
     }
 });
@@ -55,7 +51,7 @@ $('body')
     ourPages.addPage(['nature_1.jpg', 'nature_2.jpg', 'nature_3.jpg', 'nature_4.jpg']);
     ourPages.addPage(['city_1.jpg', 'city_2.jpg', 'city_3.jpg', 'city_4.jpg']);
     ourPages.addPage(['graphic_1.jpg', 'graphic_2.jpg', 'graphic_3.jpg', 'graphic_4.jpg']);
-//    ourPages.addPage(['space_1.jpg', 'space_2.jpg', 'space_3.jpg', 'space_4.jpg']);
+    ourPages.addPage(['space_1.jpg', 'space_2.jpg', 'space_3.jpg', 'space_4.jpg']);
 
 
     var list = '';
