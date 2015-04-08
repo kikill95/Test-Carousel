@@ -15,37 +15,15 @@ Page.prototype.addPage = function(elements) {
     });
     renderPage(this.pages, _.last(this.pages), this.pages.length);
 };
-Page.prototype.insertPage = function(i, elements) {
-
-    var clone = _.clone(this.pages),
-        lng = clone.length;
-    for (var j = 0, k = 0; j <= lng; j++, k++) {
-        if (i !== j) {
-
-            this.pages[j] = {
-                id: clone[k].id,
-                elements: clone[k].elements,
-                current: clone[k].current
-            };
-
-        } else {
-
-            this.pages[j] = {
-                id: countId(),
-                elements: elements || [],
-                current: 0
-            };
-            k--;
-            renderPage(this.pages, this.pages[j], i + 1);
-
-        }
-    }
-
-};
 Page.prototype.removePage = function(i) {
     this.pages = _.filter(this.pages, function(list, num) {
         return num !== i;
     });
+    $('.carousel .pages').html('');
+    var length = this.pages.length;
+    for (var j = 0; j < length; j++) {
+        renderPage(this.pages, this.pages[j], j + 1);
+    }
 };
 Page.prototype.getPage = function(i) {
     return this.pages[i];
@@ -57,8 +35,7 @@ Page.prototype.getPages = function() {
 
 
 function renderPage(ourPages, element, pagePosition) {
-    var $pagesList = $('.carousel .pages .page'),
-        length = $pagesList.length || 0,
+    var length = $('.carousel .pages .page').length || 0,
         html,
         picturesCount = element.elements.length;
 
@@ -69,24 +46,13 @@ function renderPage(ourPages, element, pagePosition) {
     html += '</ul></li>';
 
     if (_.isNumber(pagePosition)) {
-        if (pagePosition > length) {
-            pagePosition = length;
-        }
-
-        if (pagePosition > 1 && length !== 0) {
-            $pagesList[pagePosition - 1].after(html);
-        } else {
-            $('.carousel .pages').append(html);
-        }
-
+        $('.carousel .pages').append(html);
     }
 
-    //helper functions
     styling(pagePosition);
     addMovingEffects(ourPages, $('.carousel .pages .page'));
 
 
-    //indicators - pages
     if (length === 0) {
         $('.info-block .pages-indicator').append('<li class="page-indicator-active"></li>');
     } else {

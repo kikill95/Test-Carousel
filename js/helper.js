@@ -10,18 +10,13 @@ function styling(index) {
 }
 jQuery.fn.extend({
     dizziness: function(width, index) {
-        var length,
-            $element = this.first();
-        for (var i = 0; i < index; i++) {
+        var $element = $(this[index - 1]),
             length = $element.children().length;
-            $element = $element.next();
-        }
-        this.css('width', length * parseInt(width) + 'px');
+        this.css('width', length * parseInt(width) + 10 + 'px');
     }
 });
 
 
-//indicators - elements
 function setIndicator(ourPages, currentPage) {
     var list = '';
     for (var i = 0; i < ourPages[currentPage].elements.length; i++) {
@@ -39,15 +34,26 @@ function setIndicator(ourPages, currentPage) {
 
 
 
-//------------START------------
-//for beginning app
 var ourPages = new Page();
 var currentPage = 0;
+$('body')
+    .on('selectstart', function(e) {
+        e.preventDefault();
+    })
+    .on('dragstart', function(e) {
+        e.preventDefault();
+    })
+    .on('dblclick', function(e) {
+        e.preventDefault();
+    });
+
 (function() {
     ourPages.addPage(['nature_1.jpg', 'nature_2.jpg', 'nature_3.jpg', 'nature_4.jpg']);
     ourPages.addPage(['city_1.jpg', 'city_2.jpg', 'city_3.jpg', 'city_4.jpg']);
+    ourPages.addPage(['graphic_1.jpg', 'graphic_2.jpg', 'graphic_3.jpg', 'graphic_4.jpg']);
+    ourPages.addPage(['space_1.jpg', 'space_2.jpg', 'space_3.jpg', 'space_4.jpg']);
 
-    //init indicators of elements
+
     var list = '';
     for (var i = 0; i < ourPages.pages[currentPage].elements.length; i++) {
 
