@@ -12,7 +12,7 @@ jQuery.fn.extend({
     dizziness: function(width, index) {
         var $element = $(this[index - 1]),
             length = $element.children().length;
-        this.css('width', length * parseInt(width) + 'px');
+        this.css('width', length * parseInt(width) + 10 + 'px');
     }
 });
 
