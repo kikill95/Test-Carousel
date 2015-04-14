@@ -2,7 +2,7 @@ $(window).on('resize', function() {
     $('.carousel .element').css('height', $('body').css('height'));
 });
 
-
+var animation = false;
 
 function addMovingEffects(ourPages, $list) {
     var firstPositionX = 0,
@@ -22,6 +22,7 @@ function addMovingEffects(ourPages, $list) {
                 isMoveble = false;
                 return;
             }
+            animation = true;
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
             top = parseInt($(e.target).parent().parent().parent().css('marginTop'));
@@ -31,7 +32,7 @@ function addMovingEffects(ourPages, $list) {
         .on('mousemove', function(e) {
             e.preventDefault();
 
-            if ( isMoveble &&
+            if ( isMoveble && animation &&
                     ( Math.abs(e.clientX - firstPositionX) > 50 || Math.abs(e.clientY - firstPositionY) > 50) )  {
 
                 if (canHorisontalMove && Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
@@ -53,6 +54,8 @@ function addMovingEffects(ourPages, $list) {
         })
         .on('mouseup', function(e) {
             if (!isMoveble) return;
+            isMoveble = false;
+            animation = false;
             var secondPositionX = e.clientX,
                 secondPositionY = e.clientY,
                 $element = $('.carousel .element'),
@@ -89,6 +92,7 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .elements-indicator .element-indicator-active').prev().addClass('element-indicator-active');
                                 $('.info-block .elements-indicator .element-indicator-active').last().removeClass('element-indicator-active');
                                 ourPages[currentPage].current--;
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
@@ -103,6 +107,7 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .elements-indicator .element-indicator-active').next().addClass('element-indicator-active');
                                 $('.info-block .elements-indicator .element-indicator-active').first().removeClass('element-indicator-active');
                                 ourPages[currentPage].current++;
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
@@ -122,6 +127,7 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .pages-indicator .page-indicator-active').last().removeClass('page-indicator-active');
                                 currentPage--;
                                 setIndicator(ourPages, currentPage);
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
@@ -137,6 +143,7 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .pages-indicator .page-indicator-active').first().removeClass('page-indicator-active');
                                 currentPage++;
                                 setIndicator(ourPages, currentPage);
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
@@ -149,7 +156,6 @@ function addMovingEffects(ourPages, $list) {
             } else {
                 comeBack($(e.target));
             }
-            isMoveble = false;
         });
 
     function comeBack($el) {
