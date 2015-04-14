@@ -2,7 +2,6 @@ $(window).on('resize', function() {
     $('.carousel .element').css('height', $('body').css('height'));
 });
 
-var animation = false;
 
 function addMovingEffects(ourPages, $list) {
     var firstPositionX = 0,
@@ -22,7 +21,6 @@ function addMovingEffects(ourPages, $list) {
                 isMoveble = false;
                 return;
             }
-            animation = true;
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
             top = parseInt($(e.target).parent().parent().parent().css('marginTop'));
@@ -32,7 +30,7 @@ function addMovingEffects(ourPages, $list) {
         .on('mousemove', function(e) {
             e.preventDefault();
 
-            if ( isMoveble && animation &&
+            if ( isMoveble &&
                     ( Math.abs(e.clientX - firstPositionX) > 50 || Math.abs(e.clientY - firstPositionY) > 50) )  {
 
                 if (canHorisontalMove && Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
@@ -55,7 +53,6 @@ function addMovingEffects(ourPages, $list) {
         .on('mouseup', function(e) {
             if (!isMoveble) return;
             isMoveble = false;
-            animation = false;
             var secondPositionX = e.clientX,
                 secondPositionY = e.clientY,
                 $element = $('.carousel .element'),
@@ -161,10 +158,14 @@ function addMovingEffects(ourPages, $list) {
     function comeBack($el) {
         $el.parent().parent().animate({
             marginLeft: left
-        }, 200);
+        }, 200, function() {
+            isMoveble = false;
+        });
         $el.parent().parent().parent().animate({
             marginTop: top
-        }, 200);
+        }, 200, function() {
+            isMoveble = false;
+        });
     }
 
 }
