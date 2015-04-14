@@ -20,9 +20,12 @@ function addMovingEffects(ourPages, $list) {
         .on('mousedown', function(e) {
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
+
+            console.log(firstPositionX + '/' + e.clientX);
+
             top = parseInt($(e.target).parent().parent().parent().css('marginTop'));
             left = parseInt($(e.target).parent().parent().css('marginLeft'));
-            isMoveble = true;
+            canHorisontalMove = canVerticalMove = isMoveble = true;
         })
         .on('mousemove', function(e) {
             e.preventDefault();
@@ -48,14 +51,36 @@ function addMovingEffects(ourPages, $list) {
             }
         })
         .on('mouseup', function(e) {
+            isMoveble = false;
             var secondPositionX = e.clientX,
                 secondPositionY = e.clientY,
-                $element = $('.carousel .element');
-            if ( Math.abs(secondPositionX - firstPositionX) > parseInt($element.css('width')) / 4 ||
-                    Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4 ) {
+                $element = $('.carousel .element'),
+                move = false,
+                horMove = false,
+                rightMove = false,
+                downMove = false;
 
-                if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
-                    if (secondPositionX > firstPositionX) {
+            if (Math.abs(secondPositionX - firstPositionX) > parseInt($element.css('width')) / 4 ||
+                    Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4) {
+                move = true;
+            }
+            if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
+                horMove = true;
+            }
+            if (secondPositionX > firstPositionX) {
+                rightMove = true;
+            }
+            if (secondPositionY > firstPositionY) {
+                downMove = true;
+            }
+
+
+            if (move) {
+
+                if (horMove) {
+
+                    if (rightMove) {
+
                         if ( $(e.target).prev().length ) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + $(e.target).width()
@@ -69,6 +94,7 @@ function addMovingEffects(ourPages, $list) {
                         }
 
                     } else {
+
                         if ( $(e.target).next().length ) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + -$(e.target).width()
@@ -84,7 +110,9 @@ function addMovingEffects(ourPages, $list) {
                     }
 
                 } else {
-                    if (secondPositionY > firstPositionY) {
+
+                    if (downMove) {
+
                         if ( $(e.target).parent().parent().prev().length ) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + $(e.target).height()
@@ -99,6 +127,7 @@ function addMovingEffects(ourPages, $list) {
                         }
 
                     } else {
+
                         if ( $(e.target).parent().parent().next().length ) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + -$(e.target).height()
@@ -119,9 +148,6 @@ function addMovingEffects(ourPages, $list) {
             } else {
                 comeBack($(e.target));
             }
-            firstPositionX = firstPositionY = 0;
-            canHorisontalMove = canVerticalMove = true;
-            isMoveble = false;
         });
 
     function comeBack($el) {
