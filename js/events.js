@@ -53,7 +53,6 @@ function addMovingEffects(ourPages, $list) {
         })
         .on('mouseup', function(e) {
             if (!isMoveble) return;
-            isMoveble = false;
             var secondPositionX = e.clientX,
                 secondPositionY = e.clientY,
                 $element = $('.carousel .element'),
@@ -146,6 +145,7 @@ function addMovingEffects(ourPages, $list) {
             } else {
                 comeBack($(e.target));
             }
+            isMoveble = false;
         });
 
     function comeBack($el) {
