@@ -3,7 +3,6 @@ $(window).on('resize', function() {
 });
 
 
-
 function addMovingEffects(ourPages, $list) {
     var firstPositionX = 0,
         firstPositionY = 0,
@@ -18,11 +17,15 @@ function addMovingEffects(ourPages, $list) {
         .off('mousemove')
         .off('mouseup')
         .on('mousedown', function(e) {
+            if (isMoveble) {
+                isMoveble = false;
+                return;
+            }
             firstPositionX = e.clientX;
             firstPositionY = e.clientY;
             top = parseInt($(e.target).parent().parent().parent().css('marginTop'));
             left = parseInt($(e.target).parent().parent().css('marginLeft'));
-            isMoveble = true;
+            canHorisontalMove = canVerticalMove = isMoveble = true;
         })
         .on('mousemove', function(e) {
             e.preventDefault();
@@ -48,14 +51,37 @@ function addMovingEffects(ourPages, $list) {
             }
         })
         .on('mouseup', function(e) {
+            if (!isMoveble) return;
+            isMoveble = false;
             var secondPositionX = e.clientX,
                 secondPositionY = e.clientY,
-                $element = $('.carousel .element');
-            if ( Math.abs(secondPositionX - firstPositionX) > parseInt($element.css('width')) / 4 ||
-                    Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4 ) {
+                $element = $('.carousel .element'),
+                move = false,
+                horMove = false,
+                rightMove = false,
+                downMove = false;
 
-                if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
-                    if (secondPositionX > firstPositionX) {
+            if (Math.abs(secondPositionX - firstPositionX) > parseInt($element.css('width')) / 4 ||
+                    Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4) {
+                move = true;
+            }
+            if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
+                horMove = true;
+            }
+            if (secondPositionX > firstPositionX) {
+                rightMove = true;
+            }
+            if (secondPositionY > firstPositionY) {
+                downMove = true;
+            }
+
+
+            if (move) {
+
+                if (horMove) {
+
+                    if (rightMove) {
+
                         if ( $(e.target).prev().length ) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + $(e.target).width()
@@ -63,12 +89,14 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .elements-indicator .element-indicator-active').prev().addClass('element-indicator-active');
                                 $('.info-block .elements-indicator .element-indicator-active').last().removeClass('element-indicator-active');
                                 ourPages[currentPage].current--;
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
                         }
 
                     } else {
+
                         if ( $(e.target).next().length ) {
                             $(e.target).parent().parent().animate({
                                 marginLeft: left + -$(e.target).width()
@@ -76,6 +104,7 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .elements-indicator .element-indicator-active').next().addClass('element-indicator-active');
                                 $('.info-block .elements-indicator .element-indicator-active').first().removeClass('element-indicator-active');
                                 ourPages[currentPage].current++;
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
@@ -84,7 +113,9 @@ function addMovingEffects(ourPages, $list) {
                     }
 
                 } else {
-                    if (secondPositionY > firstPositionY) {
+
+                    if (downMove) {
+
                         if ( $(e.target).parent().parent().prev().length ) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + $(e.target).height()
@@ -93,12 +124,14 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .pages-indicator .page-indicator-active').last().removeClass('page-indicator-active');
                                 currentPage--;
                                 setIndicator(ourPages, currentPage);
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
                         }
 
                     } else {
+
                         if ( $(e.target).parent().parent().next().length ) {
                             $(e.target).parent().parent().parent().animate({
                                 marginTop: top + -$(e.target).height()
@@ -107,6 +140,7 @@ function addMovingEffects(ourPages, $list) {
                                 $('.info-block .pages-indicator .page-indicator-active').first().removeClass('page-indicator-active');
                                 currentPage++;
                                 setIndicator(ourPages, currentPage);
+                                isMoveble = false;
                             });
                         } else {
                             comeBack($(e.target));
@@ -119,18 +153,19 @@ function addMovingEffects(ourPages, $list) {
             } else {
                 comeBack($(e.target));
             }
-            firstPositionX = firstPositionY = 0;
-            canHorisontalMove = canVerticalMove = true;
-            isMoveble = false;
         });
 
     function comeBack($el) {
         $el.parent().parent().animate({
             marginLeft: left
-        }, 200);
+        }, 200, function() {
+            isMoveble = false;
+        });
         $el.parent().parent().parent().animate({
             marginTop: top
-        }, 200);
+        }, 200, function() {
+            isMoveble = false;
+        });
     }
 
 }

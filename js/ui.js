@@ -15,6 +15,33 @@ Page.prototype.addPage = function(elements) {
     });
     renderPage(this.pages, _.last(this.pages), this.pages.length);
 };
+Page.prototype.insertPage = function(i, elements) {
+
+    var clone = _.clone(this.pages),
+        lng = clone.length;
+    for (var j = 0, k = 0; j <= lng; j++, k++) {
+        if (i !== j) {
+
+            this.pages[j] = {
+                id: clone[k].id,
+                elements: clone[k].elements,
+                current: clone[k].current
+            };
+
+        } else {
+
+            this.pages[j] = {
+                id: countId(),
+                elements: elements || [],
+                current: 0
+            };
+            k--;
+            renderPage(this.pages, this.pages[j], i + 1);
+
+        }
+    }
+
+};
 Page.prototype.removePage = function(i) {
     this.pages = _.filter(this.pages, function(list, num) {
         return num !== i;
