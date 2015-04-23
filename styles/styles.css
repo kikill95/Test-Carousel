@@ -25,7 +25,8 @@ body {
     background-color: #000;
 }
 .carousel .page {
-    width: 100%;
+    overflow: hidden;
+    float: left;
 }
 .carousel .element {
     display: inline-block;
@@ -34,10 +35,10 @@ body {
     background-position: center center;
     background-size: 100%;
 }
-.info-block .indicators {
+.indicators {
     position: absolute;
 }
-.info-block .indicators li {
+.indicators li {
     width: 0.5em;
     height: 0.5em;
     behavior: url(styles/pie/PIE.htc); /* IE border-radius */
@@ -48,25 +49,16 @@ body {
     position: relative;
     z-index: 2;
 }
-.info-block .pages-indicator {
-    right: 5px;
-}
-.info-block .pages-indicator li {
-    margin: 0.3em;
-    float: right;
-    clear: both;
-}
-.info-block .elements-indicator {
+.elements-indicator {
     width: 100%;
     bottom: 4px;
     text-align: center;
 }
-.info-block .elements-indicator li {
+.elements-indicator li {
     display: inline-block;
     margin: 0.2em;
 }
-.info-block .indicators li.element-indicator-active,
-.info-block .indicators li.page-indicator-active {
+.indicators li.element-indicator-active {
     background: #ffa500;
     -pie-background: rgba(255, 165, 0, 1);
     background: rgba(255, 165, 0, 1);

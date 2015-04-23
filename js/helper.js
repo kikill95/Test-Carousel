@@ -1,13 +1,13 @@
 function styling(index) {
-    var height = parseInt($('body').css('height')),
-        width = parseInt($('body').css('width'));
+    var height = parseInt($('body').css('height')) / 2,
+        width = parseInt($('body').css('width')) / 2;
 
-    $('.carousel .elements').dizziness(width, index);
+    $('.carousel .elements').dizziness(width + 1, index);
     $('.carousel .element').css('height', height)
         .css('width', width);
     $('.carousel .pages').css('height', height);
-    $('.carousel .page').css('height', height);
-    $('.indicators.pages-indicator').css('top', height / 2 - $('.pages-indicator li').length * parseInt($('.pages-indicator li').css('height')) + 'px');
+    $('.carousel .page').css('height', height)
+        .css('width', width);
 }
 jQuery.fn.extend({
     dizziness: function(width, index) {
@@ -18,19 +18,19 @@ jQuery.fn.extend({
 });
 
 
-function setIndicator(ourPages, currentPage) {
-    var list = '';
-    for (var i = 0; i < ourPages[currentPage].elements.length; i++) {
-
-        if (i === ourPages[currentPage].current) {
-            list += '<li class="element-indicator-active"></li>'
-        } else {
-            list += '<li></li>'
-        }
-
-    }
-    $('.indicators.elements-indicator').html(list);
-}
+//function setIndicator(ourPages, currentPage) {
+//    var list = '';
+//    for (var i = 0; i < ourPages[currentPage].elements.length; i++) {
+//
+//        if (i === ourPages[currentPage].current) {
+//            list += '<li class="element-indicator-active"></li>'
+//        } else {
+//            list += '<li></li>'
+//        }
+//
+//    }
+//    $('.indicators.elements-indicator').html(list);
+//}
 
 
 
@@ -55,15 +55,15 @@ $('body')
     ourPages.addPage(['space_1.jpg', 'space_2.jpg', 'space_3.jpg', 'space_4.jpg']);
 
 
-    var list = '';
-    for (var i = 0; i < ourPages.pages[currentPage].elements.length; i++) {
-
-        if (i === 0) {
-            list += '<li class="element-indicator-active"></li>'
-        } else {
-            list += '<li></li>'
-        }
-
-    }
-    $('.indicators.elements-indicator').html(list);
+//    var list = '';
+//    for (var i = 0; i < ourPages.pages[currentPage].elements.length; i++) {
+//
+//        if (i === 0) {
+//            list += '<li class="element-indicator-active"></li>'
+//        } else {
+//            list += '<li></li>'
+//        }
+//
+//    }
+//    $('.indicators.elements-indicator').html(list);
 })();
