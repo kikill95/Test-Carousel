@@ -10,8 +10,7 @@ function Page () {
 Page.prototype.addPage = function(elements) {
     this.pages.push({
         id: countId(),
-        elements: elements || [],
-        current: 0
+        elements: elements || []
     });
     renderPage(this.pages, _.last(this.pages), this.pages.length);
 };
@@ -26,16 +25,14 @@ Page.prototype.insertPage = function(i, elements) {
 
             this.pages[j] = {
                 id: clone[k].id,
-                elements: clone[k].elements,
-                current: clone[k].current
+                elements: clone[k].elements
             };
 
         } else {
 
             this.pages[j] = {
                 id: countId(),
-                elements: elements || [],
-                current: 0
+                elements: elements || []
             };
             k--;
 

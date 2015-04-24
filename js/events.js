@@ -61,9 +61,9 @@ function addMovingEffects(ourPages, $list) {
                         $(e.target).parent().animate({
                             marginLeft: left + $(e.target).width()
                         }, 200, function() {
-//                                $('.elements-indicator .element-indicator-active').prev().addClass('element-indicator-active');
-//                                $('.elements-indicator .element-indicator-active').last().removeClass('element-indicator-active');
-//                                ourPages[currentPage].current--;
+                            $(e.target).parent().parent().find('.indicators .indicator-active').prev().addClass('indicator-active');
+                            $(e.target).parent().parent().find('.indicators .indicator-active').last().removeClass('indicator-active');
+
                             isMoveble = false;
                         });
 
@@ -78,9 +78,9 @@ function addMovingEffects(ourPages, $list) {
                         $(e.target).parent().animate({
                             marginLeft: left + -$(e.target).width()
                         }, 200, function() {
-//                                $('.elements-indicator .element-indicator-active').next().addClass('element-indicator-active');
-//                                $('.elements-indicator .element-indicator-active').first().removeClass('element-indicator-active');
-//                                ourPages[currentPage].current++;
+                            $(e.target).parent().parent().find('.indicators .indicator-active').next().addClass('indicator-active');
+                            $(e.target).parent().parent().find('.indicators .indicator-active').first().removeClass('indicator-active');
+
                             isMoveble = false;
                         });
 
