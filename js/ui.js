@@ -71,11 +71,22 @@ Page.prototype.getPages = function() {
 function renderPage(ourPages, element, pagePosition) {
     var length = $('.carousel .pages .page').length || 0,
         html,
-        picturesCount = element.elements.length;
+        picturesCount = element.elements.length,
+        i;
 
     html = '<li class="page" id="' + element.id +  '"><ul class="elements">';
-    for (var i = 0; i < picturesCount; i++) {
+    for (i = 0; i < picturesCount; i++) {
         html += '<li class="element" style="background-image: url(images/' + element.elements[i] + ')"></li>'
+    }
+    html += '</ul><ul class="indicators">';
+    for (i = 0; i < picturesCount; i++) {
+
+        if (i === 0) {
+            html += '<li class="indicator-active"></li>'
+        } else {
+            html += '<li></li>'
+        }
+
     }
     html += '</ul></li>';
 

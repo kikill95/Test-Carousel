@@ -36,29 +36,23 @@ body {
     background-size: 100%;
 }
 .indicators {
-    position: absolute;
+    margin-top: -24px;
+    text-align: center;
 }
 .indicators li {
     width: 0.5em;
     height: 0.5em;
+    position: relative;
+    display: inline-block;
+    margin: 0.2em;
+    z-index: 2;
     behavior: url(styles/pie/PIE.htc); /* IE border-radius */
     border-radius: 0.25em;
     background: #ffa500;
     -pie-background: rgba(255, 165, 0, 0.4);
     background: rgba(255, 165, 0, 0.4);
-    position: relative;
-    z-index: 2;
 }
-.elements-indicator {
-    width: 100%;
-    bottom: 4px;
-    text-align: center;
-}
-.elements-indicator li {
-    display: inline-block;
-    margin: 0.2em;
-}
-.indicators li.element-indicator-active {
+.indicators li.indicator-active {
     background: #ffa500;
     -pie-background: rgba(255, 165, 0, 1);
     background: rgba(255, 165, 0, 1);

@@ -8,6 +8,7 @@ function styling(index) {
     $('.carousel .pages').css('height', height);
     $('.carousel .page').css('height', height)
         .css('width', width);
+    $('.page .indicators').css('width', width);
 }
 jQuery.fn.extend({
     dizziness: function(width, index) {
