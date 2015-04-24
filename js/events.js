@@ -1,151 +1,91 @@
-$(window).on('resize', function() {
-    $('.carousel .element').css('height', $('body').css('height'));
-});
-
+var isMoveble = false,
+    moveCarouselId = null;
 
 function addMovingEffects(ourPages, $list) {
     var firstPositionX = 0,
-        firstPositionY = 0,
-        top = 0,
-        left = 0,
-        canVerticalMove = true,
-        canHorisontalMove = true,
-        isMoveble = false;
+        left = 0;
+    isMoveble = false;
 
     $list
         .off('mousedown')
         .off('mousemove')
         .off('mouseup')
         .on('mousedown', function(e) {
+            if (moveCarouselId !== null) return;
             if (isMoveble) {
                 isMoveble = false;
                 return;
             }
             firstPositionX = e.clientX;
-            firstPositionY = e.clientY;
-            top = parseInt($(e.target).parent().parent().parent().css('marginTop'));
-            left = parseInt($(e.target).parent().parent().css('marginLeft'));
-            canHorisontalMove = canVerticalMove = isMoveble = true;
+            left = parseInt($(e.target).parent().css('marginLeft'));
+            isMoveble = true;
+            moveCarouselId = $(e.target).parent().parent().attr('id');
         })
         .on('mousemove', function(e) {
             e.preventDefault();
+            if (moveCarouselId !== $(e.target).parent().parent().attr('id')) return;
 
-            if ( isMoveble &&
-                    ( Math.abs(e.clientX - firstPositionX) > 50 || Math.abs(e.clientY - firstPositionY) > 50) )  {
+            if ( isMoveble && ( Math.abs(e.clientX - firstPositionX) > 50 ) )  {
 
-                if (canHorisontalMove && Math.abs(e.clientX - firstPositionX) > Math.abs(e.clientY - firstPositionY)) {
-
-                    $(e.target).parent().parent().animate({
-                        marginLeft: left + e.clientX - firstPositionX
-                    }, 0);
-                    canVerticalMove = false;
-
-                } else if (canVerticalMove) {
-
-                    $(e.target).parent().parent().parent().animate({
-                        marginTop: top + e.clientY - firstPositionY
-                    }, 0);
-                    canHorisontalMove = false;
-                }
+                $(e.target).parent().animate({
+                    marginLeft: left + e.clientX - firstPositionX
+                }, 0);
 
             }
         })
         .on('mouseup', function(e) {
+            if (moveCarouselId !== $(e.target).parent().parent().attr('id')) return;
             if (!isMoveble) return;
+
+            moveCarouselId = null;
             isMoveble = false;
             var secondPositionX = e.clientX,
-                secondPositionY = e.clientY,
                 $element = $('.carousel .element'),
                 move = false,
-                horMove = false,
-                rightMove = false,
-                downMove = false;
+                rightMove = false;
 
-            if (Math.abs(secondPositionX - firstPositionX) > parseInt($element.css('width')) / 4 ||
-                    Math.abs(secondPositionY - firstPositionY) > parseInt($element.css('height')) / 4) {
+            if (Math.abs(secondPositionX - firstPositionX) > parseInt($element.css('width')) / 4) {
                 move = true;
-            }
-            if (Math.abs(secondPositionX - firstPositionX) > Math.abs(secondPositionY - firstPositionY)) {
-                horMove = true;
             }
             if (secondPositionX > firstPositionX) {
                 rightMove = true;
-            }
-            if (secondPositionY > firstPositionY) {
-                downMove = true;
             }
 
 
             if (move) {
 
-                if (horMove) {
+                if (rightMove) {
 
-                    if (rightMove) {
+                    if ( $(e.target).prev().length ) {
 
-                        if ( $(e.target).prev().length ) {
-                            $(e.target).parent().parent().animate({
-                                marginLeft: left + $(e.target).width()
-                            }, 200, function() {
-                                $('.info-block .elements-indicator .element-indicator-active').prev().addClass('element-indicator-active');
-                                $('.info-block .elements-indicator .element-indicator-active').last().removeClass('element-indicator-active');
-                                ourPages[currentPage].current--;
-                                isMoveble = false;
-                            });
-                        } else {
-                            comeBack($(e.target));
-                        }
+                        $(e.target).parent().animate({
+                            marginLeft: left + $(e.target).width()
+                        }, 200, function() {
+                            $(e.target).parent().parent().find('.indicators .indicator-active').prev().addClass('indicator-active');
+                            $(e.target).parent().parent().find('.indicators .indicator-active').last().removeClass('indicator-active');
+
+                            isMoveble = false;
+                        });
 
                     } else {
-
-                        if ( $(e.target).next().length ) {
-                            $(e.target).parent().parent().animate({
-                                marginLeft: left + -$(e.target).width()
-                            }, 200, function() {
-                                $('.info-block .elements-indicator .element-indicator-active').next().addClass('element-indicator-active');
-                                $('.info-block .elements-indicator .element-indicator-active').first().removeClass('element-indicator-active');
-                                ourPages[currentPage].current++;
-                                isMoveble = false;
-                            });
-                        } else {
-                            comeBack($(e.target));
-                        }
-
+                        comeBack($(e.target));
                     }
 
                 } else {
 
-                    if (downMove) {
+                    if ( $(e.target).next().length ) {
 
-                        if ( $(e.target).parent().parent().prev().length ) {
-                            $(e.target).parent().parent().parent().animate({
-                                marginTop: top + $(e.target).height()
-                            }, 200, function() {
-                                $('.info-block .pages-indicator .page-indicator-active').prev().addClass('page-indicator-active');
-                                $('.info-block .pages-indicator .page-indicator-active').last().removeClass('page-indicator-active');
-                                currentPage--;
-                                setIndicator(ourPages, currentPage);
-                                isMoveble = false;
-                            });
-                        } else {
-                            comeBack($(e.target));
-                        }
+                        $(e.target).parent().animate({
+                            marginLeft: left + -$(e.target).width()
+                        }, 200, function() {
+                            $(e.target).parent().parent().find('.indicators .indicator-active').next().addClass('indicator-active');
+                            $(e.target).parent().parent().find('.indicators .indicator-active').first().removeClass('indicator-active');
+
+                            isMoveble = false;
+                        });
 
                     } else {
-
-                        if ( $(e.target).parent().parent().next().length ) {
-                            $(e.target).parent().parent().parent().animate({
-                                marginTop: top + -$(e.target).height()
-                            }, 200, function() {
-                                $('.info-block .pages-indicator .page-indicator-active').next().addClass('page-indicator-active');
-                                $('.info-block .pages-indicator .page-indicator-active').first().removeClass('page-indicator-active');
-                                currentPage++;
-                                setIndicator(ourPages, currentPage);
-                                isMoveble = false;
-                            });
-                        } else {
-                            comeBack($(e.target));
-                        }
-
+                        comeBack($(e.target));
                     }
 
                 }
@@ -155,17 +95,14 @@ function addMovingEffects(ourPages, $list) {
             }
         });
 
+
     function comeBack($el) {
-        $el.parent().parent().animate({
+        $el.parent().animate({
             marginLeft: left
-        }, 200, function() {
-            isMoveble = false;
-        });
-        $el.parent().parent().parent().animate({
-            marginTop: top
         }, 200, function() {
             isMoveble = false;
         });
     }
 
 }
+

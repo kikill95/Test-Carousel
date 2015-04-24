@@ -1,7 +1,7 @@
 var countId = function() {
-        this.id = this.id || 0;
-        return this.id++;
-    };
+    this.id = this.id || 0;
+    return this.id++;
+};
 
 
 function Page () {
@@ -10,35 +10,39 @@ function Page () {
 Page.prototype.addPage = function(elements) {
     this.pages.push({
         id: countId(),
-        elements: elements || [],
-        current: 0
+        elements: elements || []
     });
     renderPage(this.pages, _.last(this.pages), this.pages.length);
 };
 Page.prototype.insertPage = function(i, elements) {
 
     var clone = _.clone(this.pages),
-        lng = clone.length;
-    for (var j = 0, k = 0; j <= lng; j++, k++) {
+        lng = clone.length,
+        j,
+        k;
+    for (j = 0, k = 0; j <= lng; j++, k++) {
         if (i !== j) {
 
             this.pages[j] = {
                 id: clone[k].id,
-                elements: clone[k].elements,
-                current: clone[k].current
+                elements: clone[k].elements
             };
 
         } else {
 
             this.pages[j] = {
                 id: countId(),
-                elements: elements || [],
-                current: 0
+                elements: elements || []
             };
             k--;
-            renderPage(this.pages, this.pages[j], i + 1);
 
         }
+    }
+
+    $('.carousel .pages').html('');
+    var length = this.pages.length;
+    for (j = 0; j < length; j++) {
+        renderPage(this.pages, this.pages[j], j + 1);
     }
 
 };
@@ -64,11 +68,22 @@ Page.prototype.getPages = function() {
 function renderPage(ourPages, element, pagePosition) {
     var length = $('.carousel .pages .page').length || 0,
         html,
-        picturesCount = element.elements.length;
+        picturesCount = element.elements.length,
+        i;
 
-    html = '<li class="page"><ul class="elements">';
-    for (var i = 0; i < picturesCount; i++) {
+    html = '<li class="page" id="' + element.id +  '"><ul class="elements">';
+    for (i = 0; i < picturesCount; i++) {
         html += '<li class="element" style="background-image: url(images/' + element.elements[i] + ')"></li>'
+    }
+    html += '</ul><ul class="indicators">';
+    for (i = 0; i < picturesCount; i++) {
+
+        if (i === 0) {
+            html += '<li class="indicator-active"></li>'
+        } else {
+            html += '<li></li>'
+        }
+
     }
     html += '</ul></li>';
 
@@ -78,12 +93,5 @@ function renderPage(ourPages, element, pagePosition) {
 
     styling(pagePosition);
     addMovingEffects(ourPages, $('.carousel .pages .page'));
-
-
-    if (length === 0) {
-        $('.info-block .pages-indicator').append('<li class="page-indicator-active"></li>');
-    } else {
-        $('.info-block .pages-indicator').append('<li></li>');
-    }
 
 }
