@@ -1,6 +1,6 @@
 function styling(index) {
     var height = parseInt($('body').css('height')) / 2,
-        width = parseInt($('body').css('width')) / 2;
+        width = parseInt($('body').css('width')) / 2 | 0;
 
     $('.carousel .elements').dizziness(width + 1, index);
     $('.carousel .element').css('height', height)
