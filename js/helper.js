@@ -36,7 +36,6 @@ jQuery.fn.extend({
 
 
 var ourPages = new Page();
-var currentPage = 0;
 $('body')
     .on('selectstart', function(e) {
         e.preventDefault();

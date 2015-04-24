@@ -41,9 +41,10 @@ Page.prototype.insertPage = function(i, elements) {
 
         }
     }
+
     $('.carousel .pages').html('');
     var length = this.pages.length;
-    for (var j = 0; j < length; j++) {
+    for (j = 0; j < length; j++) {
         renderPage(this.pages, this.pages[j], j + 1);
     }
 
