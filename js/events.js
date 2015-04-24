@@ -1,4 +1,5 @@
-var isMoveble = false;
+var isMoveble = false,
+    moveCarouselId = null;
 
 function addMovingEffects(ourPages, $list) {
     var firstPositionX = 0,
@@ -10,6 +11,7 @@ function addMovingEffects(ourPages, $list) {
         .off('mousemove')
         .off('mouseup')
         .on('mousedown', function(e) {
+            if (moveCarouselId !== null) return;
             if (isMoveble) {
                 isMoveble = false;
                 return;
@@ -17,9 +19,11 @@ function addMovingEffects(ourPages, $list) {
             firstPositionX = e.clientX;
             left = parseInt($(e.target).parent().css('marginLeft'));
             isMoveble = true;
+            moveCarouselId = $(e.target).parent().parent().attr('id');
         })
         .on('mousemove', function(e) {
             e.preventDefault();
+            if (moveCarouselId !== $(e.target).parent().parent().attr('id')) return;
 
             if ( isMoveble && ( Math.abs(e.clientX - firstPositionX) > 50 ) )  {
 
@@ -30,7 +34,10 @@ function addMovingEffects(ourPages, $list) {
             }
         })
         .on('mouseup', function(e) {
+            if (moveCarouselId !== $(e.target).parent().parent().attr('id')) return;
             if (!isMoveble) return;
+
+            moveCarouselId = null;
             isMoveble = false;
             var secondPositionX = e.clientX,
                 $element = $('.carousel .element'),

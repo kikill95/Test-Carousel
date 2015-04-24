@@ -73,7 +73,7 @@ function renderPage(ourPages, element, pagePosition) {
         html,
         picturesCount = element.elements.length;
 
-    html = '<li class="page"><ul class="elements">';
+    html = '<li class="page" id="' + element.id +  '"><ul class="elements">';
     for (var i = 0; i < picturesCount; i++) {
         html += '<li class="element" style="background-image: url(images/' + element.elements[i] + ')"></li>'
     }
