@@ -18,8 +18,10 @@ Page.prototype.addPage = function(elements) {
 Page.prototype.insertPage = function(i, elements) {
 
     var clone = _.clone(this.pages),
-        lng = clone.length;
-    for (var j = 0, k = 0; j <= lng; j++, k++) {
+        lng = clone.length,
+        j,
+        k;
+    for (j = 0, k = 0; j <= lng; j++, k++) {
         if (i !== j) {
 
             this.pages[j] = {
@@ -36,9 +38,14 @@ Page.prototype.insertPage = function(i, elements) {
                 current: 0
             };
             k--;
-            renderPage(this.pages, this.pages[j], i + 1);
 
         }
+    }
+
+    $('.carousel .pages').html('');
+    var length = this.pages.length;
+    for (j = 0; j < length; j++) {
+        renderPage(this.pages, this.pages[j], j + 1);
     }
 
 };
